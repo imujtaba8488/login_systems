@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Defines field validation.
-typedef Validator = void Function(String value);
-
-/// Defines what happens when the loginButton is pressed.
-typedef OnLoginPressed = void Function(String email, String password);
-
-/// Defines what happens when the submitButton is pressed.
-typedef OnSubmitPressed = void Function(
-  String firstName,
-  String lastName,
-  String email,
-  String password,
-);
-
 class LoginPage extends StatefulWidget {
   final Validator emailValidator, passwordValidator;
   final OnLoginPressed onLoginPressed;
@@ -48,11 +34,15 @@ class _LoginPageState extends State<LoginPage> {
   String _firstName, _lastName, _email, _password;
   double _tabBarHeight = 60;
   double _formHeight;
+  double _nameFieldWidth;
 
   @override
   Widget build(BuildContext context) {
     // 60px for any additional padding. 
     _formHeight = MediaQuery.of(context).size.height - (_tabBarHeight + 60);
+
+    // 2.5 takes into consideration padding as well.
+    _nameFieldWidth = MediaQuery.of(context).size.width / 2.5;
 
     return DefaultTabController(
       length: 2,
@@ -155,13 +145,13 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   _customizedTextFormField(
                     'First Name',
-                    width: MediaQuery.of(context).size.width / 2.5,
+                    width: _nameFieldWidth,
                     padding: EdgeInsets.all(0.0),
                     onSaved: (String value) => _firstName = value,
                   ),
                   _customizedTextFormField(
                     'Last Name',
-                    width: MediaQuery.of(context).size.width / 2.5,
+                    width: _nameFieldWidth,
                     padding: EdgeInsets.all(0.0),
                     onSaved: (String value) => _lastName = value,
                   )
@@ -309,3 +299,17 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 }
+
+/// A field validator.
+typedef Validator = void Function(String value);
+
+/// Defines the action to be taken when signInButton is pressed.
+typedef OnLoginPressed = void Function(String email, String password);
+
+/// Defines the action to be taken when signUpButton is pressed.
+typedef OnSubmitPressed = void Function(
+  String firstName,
+  String lastName,
+  String email,
+  String password,
+);
