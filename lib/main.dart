@@ -30,8 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return LoginPage(
-      loginHeaderLabel: 'Sign In!',
-      loginText: 'Sign In',
+      signInHeaderLabel: 'Sign In!',
+      signInText: 'Sign In',
       emailValidator: (String email) {
         if (email.isEmpty) {
           return 'Email is required.';

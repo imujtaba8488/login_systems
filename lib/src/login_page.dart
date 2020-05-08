@@ -19,10 +19,10 @@ class LoginPage extends StatefulWidget {
   final OnLoginPressed onLoginPressed;
   final OnSubmitPressed onSubmitPressed;
   final Function onLinkPressed;
-  final String loginText,
+  final String signInText,
       submitText,
       linkText,
-      loginHeaderLabel,
+      signInHeaderLabel,
       signUpHeaderLabel;
 
   LoginPage({
@@ -31,10 +31,10 @@ class LoginPage extends StatefulWidget {
     this.onLinkPressed,
     this.emailValidator,
     this.passwordValidator,
-    this.loginText = 'Login',
+    this.signInText = 'Sign In',
     this.submitText = 'Submit',
     this.linkText = 'Forgot Password?',
-    this.loginHeaderLabel = 'Welcome Back!',
+    this.signInHeaderLabel = 'Welcome Back!',
     this.signUpHeaderLabel = 'Sign Up!',
   });
 
@@ -43,12 +43,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _signInFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> _signupFormKey = GlobalKey<FormState>();
   String _firstName, _lastName, _email, _password;
+  double _tabBarHeight = 60;
+  double _formHeight;
 
   @override
   Widget build(BuildContext context) {
+    // 60px for any additional padding. 
+    _formHeight = MediaQuery.of(context).size.height - (_tabBarHeight + 60);
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -58,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.all(8),
-                  height: 60,
+                  height: _tabBarHeight,
                   decoration: BoxDecoration(
                     color: Colors.grey[800],
                     borderRadius: BorderRadius.circular(5.0),
@@ -76,16 +81,16 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     tabs: <Widget>[
-                      _tabLabel('Login'),
-                      _tabLabel('Create Account'),
+                      _customizedTab('Login'),
+                      _customizedTab('Create Account'),
                     ],
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height - 120,
+                  height: _formHeight,
                   child: TabBarView(
                     children: <Widget>[
-                      _loginForm(),
+                      _signInForm(),
                       _signUpForm(),
                     ],
                   ),
@@ -98,32 +103,31 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Returns the login form.
-  Widget _loginForm() {
+  Widget _signInForm() {
     return Form(
-      key: _loginFormKey,
+      key: _signInFormKey,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _headerLabel(widget.loginHeaderLabel),
-            _customTextFormField(
+            _headerLabel(widget.signInHeaderLabel),
+            _customizedTextFormField(
               'Email',
               suffixIcon: Icon(Icons.email),
               validator: widget.emailValidator,
               onSaved: (String value) => _email = value,
             ),
-            _customTextFormField(
+            _customizedTextFormField(
               'Password',
               suffixIcon: Icon(Icons.lock),
               validator: widget.passwordValidator,
               onSaved: (String value) => _email = value,
             ),
-            _customButton(
-              text: widget.loginText,
+            _customizedRaisedButton(
+              text: widget.signInText,
               onPressed: _onLoginFormSaved,
             ),
-            _customLinkButton(
+            _customizedLinkButton(
               text: widget.linkText,
               onPressed: widget.onLinkPressed,
             ),
@@ -133,7 +137,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Returns the signup form.
   Widget _signUpForm() {
     return Form(
       key: _signupFormKey,
@@ -150,13 +153,13 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  _customTextFormField(
+                  _customizedTextFormField(
                     'First Name',
                     width: MediaQuery.of(context).size.width / 2.5,
                     padding: EdgeInsets.all(0.0),
                     onSaved: (String value) => _firstName = value,
                   ),
-                  _customTextFormField(
+                  _customizedTextFormField(
                     'Last Name',
                     width: MediaQuery.of(context).size.width / 2.5,
                     padding: EdgeInsets.all(0.0),
@@ -165,19 +168,19 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            _customTextFormField(
+            _customizedTextFormField(
               'Email',
               suffixIcon: Icon(Icons.email),
               validator: widget.emailValidator,
               onSaved: (String value) => _email = value,
             ),
-            _customTextFormField(
+            _customizedTextFormField(
               'Password',
               suffixIcon: Icon(Icons.lock),
               validator: widget.passwordValidator,
               onSaved: (String value) => _password = value,
             ),
-            _customButton(
+            _customizedRaisedButton(
               text: widget.submitText,
               onPressed: _onSignupFormSaved,
             ),
@@ -187,10 +190,9 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Returns a customized label to be displayed within a tab.
-  Widget _tabLabel(String text) {
+  Widget _customizedTab(String label) {
     return Text(
-      text,
+      label,
       style: TextStyle(fontFamily: 'RobotoSlab'),
     );
   }
@@ -215,8 +217,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Returns a customized version of TextFormField.
-  Widget _customTextFormField(
+  Widget _customizedTextFormField(
     String label, {
     double width,
     Icon suffixIcon,
@@ -249,8 +250,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Returns a customized button.
-  Widget _customButton({@required String text, Function onPressed}) {
+  Widget _customizedRaisedButton({@required String text, Function onPressed}) {
     return InkWell(
       onTap: onPressed,
       child: Container(
@@ -273,8 +273,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  /// Returns a customized link button.
-  Widget _customLinkButton({@required String text, @required onPressed}) {
+  Widget _customizedLinkButton({@required String text, @required onPressed}) {
     return InkWell(
       onTap: onPressed,
       child: Center(
@@ -290,17 +289,17 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  /// Defines what happens when the login button on LoginForm is pressed.
+  /// Defines what should happen when the signInButton is pressed.
   void _onLoginFormSaved() {
-    if (_loginFormKey.currentState.validate()) {
-      _loginFormKey.currentState.save();
+    if (_signInFormKey.currentState.validate()) {
+      _signInFormKey.currentState.save();
       widget.onLoginPressed != null
           ? widget.onLoginPressed(_email, _password)
           : print('Error: No Implementation Provided');
     }
   }
 
-  /// Defines what happens when the submit button on the SignUpForm is pressed.
+  /// Defines what should happen when the signUpButton is pressed.
   void _onSignupFormSaved() {
     if (_signupFormKey.currentState.validate()) {
       _signupFormKey.currentState.save();
