@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class HeaderLabel extends StatelessWidget {
+class Header extends StatelessWidget {
   final String text;
   final double topPadding;
 
-  HeaderLabel({this.text, this.topPadding = 40.0});
+  Header({this.text, this.topPadding = 40.0});
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../src/customized_text_form_field.dart';
 import '../src/customized_raised_button.dart';
-import '../src/header_label.dart';
+import '../src/header.dart';
 import '../src/customized_link_button.dart';
 import '../src/type_defs.dart';
 
@@ -39,7 +39,7 @@ class _SignInFormState extends State<SignInForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            HeaderLabel(text: widget.headerText),
+            Header(text: widget.headerText),
             CustomizedTextFormField(
               label: 'Email',
               suffixIcon: Icon(Icons.email),
@@ -52,6 +52,7 @@ class _SignInFormState extends State<SignInForm> {
               suffixIcon: Icon(Icons.lock),
               validator: widget.passwordValidator,
               onSaved: (String value) => _password = value,
+              obscureText: true,
             ),
             CustomizedRaisedButton(
               text: widget.signInButtonLabel,
