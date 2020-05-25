@@ -9,11 +9,13 @@ class LoginPage extends StatelessWidget {
   final OnSignInButtonPressed onSignInButtonPressed;
   final OnSubmitPressed onSubmitPressed;
   final Function onLinkPressed;
-  final String signInButtonLabel,
+  final Text signInButtonLabel,
       submitButtonLabel,
       linkLabel,
       signInHeaderText,
-      signUpHeaderText;
+      signUpHeaderText,
+      signInTabText,
+      signUpTabText;
 
   LoginPage({
     this.onSignInButtonPressed,
@@ -21,11 +23,13 @@ class LoginPage extends StatelessWidget {
     this.onLinkPressed,
     this.emailValidator,
     this.passwordValidator,
-    this.signInButtonLabel = 'Sign In',
-    this.submitButtonLabel = 'Submit',
-    this.linkLabel = 'Forgot Password?',
-    this.signInHeaderText = 'Welcome Back!',
-    this.signUpHeaderText = 'Sign Up!',
+    this.signInButtonLabel = const Text('Sign In'),
+    this.submitButtonLabel = const Text('Submit'),
+    this.linkLabel = const Text('Forgot Password?'),
+    this.signInHeaderText = const Text('Welcome Back!'),
+    this.signUpHeaderText = const Text('Sign Up!'),
+    this.signInTabText = const Text('Sign In'),
+    this.signUpTabText = const Text('Create Account'),
   });
 
   @override
@@ -63,8 +67,8 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     tabs: <Widget>[
-                      _customizedTab('Login'),
-                      _customizedTab('Create Account'),
+                      _customizedTab(signInTabText),
+                      _customizedTab(signUpTabText),
                     ],
                   ),
                 ),
@@ -99,10 +103,10 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _customizedTab(String label) {
+  Widget _customizedTab(Text label) {
     return Text(
-      label,
-      style: TextStyle(fontFamily: 'RobotoSlab'),
+      label.data,
+      style: label?.style ?? TextStyle(fontFamily: 'RobotoSlab'),
     );
   }
 }

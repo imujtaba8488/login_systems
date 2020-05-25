@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomizedLinkButton extends StatelessWidget {
-  final String text;
+  final Text text;
   final Function onPressed;
 
-  CustomizedLinkButton({this.text = 'Forgot Password', this.onPressed});
+  CustomizedLinkButton({
+    this.text = const Text('Forgot Password'),
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +15,13 @@ class CustomizedLinkButton extends StatelessWidget {
       onTap: onPressed,
       child: Center(
         child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.grey[800],
-            fontFamily: 'RobotoSlab',
-            decoration: TextDecoration.underline,
-          ),
+          text.data,
+          style: text?.style ??
+              TextStyle(
+                color: Colors.grey[800],
+                fontFamily: 'RobotoSlab',
+                decoration: TextDecoration.underline,
+              ),
         ),
       ),
     );

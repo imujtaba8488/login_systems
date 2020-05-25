@@ -6,13 +6,13 @@ import '../src/header.dart';
 import '../src/type_defs.dart';
 
 class SignUpForm extends StatefulWidget {
-  final String headerText, submitButtonLabel;
+  final Text headerText, submitButtonLabel;
   final Validator emailValidator, passwordValidator;
   final OnSubmitPressed onSubmitPressed;
 
   SignUpForm({
-    this.submitButtonLabel = 'Submit',
-    this.headerText = 'Sign Up!',
+    this.submitButtonLabel = const Text('Submit'),
+    this.headerText = const Text('Sign Up!'),
     this.emailValidator,
     this.passwordValidator,
     this.onSubmitPressed,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  final String text;
+  final Text text;
   final double topPadding;
 
   Header({this.text, this.topPadding = 40.0});
@@ -16,12 +16,13 @@ class Header extends StatelessWidget {
         bottom: 10.0,
       ),
       child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 40,
-          fontFamily: 'Pacifico',
-          color: Colors.grey[800],
-        ),
+        text.data,
+        style: text?.style ??
+            TextStyle(
+              fontSize: 40,
+              fontFamily: 'Pacifico',
+              color: Colors.grey[800],
+            ),
       ),
     );
   }

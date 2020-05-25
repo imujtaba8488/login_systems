@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomizedRaisedButton extends StatelessWidget {
-  final String text;
+  final Text text;
   final Function onPressed;
 
   CustomizedRaisedButton({this.text, this.onPressed});
@@ -19,11 +19,12 @@ class CustomizedRaisedButton extends StatelessWidget {
         margin: EdgeInsets.all(20.0),
         child: Center(
           child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'RobotoSlab',
-            ),
+            text.data,
+            style: text?.style ??
+                TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'RobotoSlab',
+                ),
           ),
         ),
       ),

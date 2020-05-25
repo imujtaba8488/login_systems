@@ -7,15 +7,15 @@ import '../src/customized_link_button.dart';
 import '../src/type_defs.dart';
 
 class SignInForm extends StatefulWidget {
-  final String headerText, signInButtonLabel, linkLabel;
+  final Text headerText, signInButtonLabel, linkLabel;
   final Validator emailValidator, passwordValidator;
   final OnSignInButtonPressed onSignInButtonPressed;
   final Function onLinkPressed;
 
   SignInForm({
-    this.headerText = 'Welcome Back!',
-    this.signInButtonLabel = 'Sign In',
-    this.linkLabel = 'Forgot Password?',
+    this.headerText = const Text('Welcome Back!'),
+    this.signInButtonLabel = const Text('Sign In'),
+    this.linkLabel = const Text('Forgot Password?'),
     this.emailValidator,
     this.passwordValidator,
     this.onSignInButtonPressed,

@@ -8,7 +8,7 @@ class CustomizedTextFormField extends StatelessWidget {
   final Function validator;
   final Function onSaved;
   final TextInputType textInputType;
-  bool obscureText;
+  final bool obscureText;
 
   CustomizedTextFormField({
     this.label,
