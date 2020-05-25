@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../src/sign_in_form.dart';
-import '../src/sign_up_form.dart';
-import '../src/type_defs.dart';
+import '../forms/sign_in_form.dart';
+import '../forms/sign_up_form.dart';
+import '../type_defs.dart';
 
 class LoginPage extends StatelessWidget {
   final Validator emailValidator, passwordValidator;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../src/customized_text_form_field.dart';
-import '../src/customized_raised_button.dart';
-import '../src/header.dart';
-import '../src/type_defs.dart';
+import '../widgets/customized_text_form_field.dart';
+import '../widgets/customized_raised_button.dart';
+import '../widgets/header.dart';
+import '../type_defs.dart';
 
 class SignUpForm extends StatefulWidget {
   final Text headerText, submitButtonLabel;
