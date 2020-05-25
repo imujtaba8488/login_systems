@@ -4,16 +4,16 @@ import '../src/sign_in_form.dart';
 import '../src/sign_up_form.dart';
 import '../src/type_defs.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   final Validator emailValidator, passwordValidator;
   final OnSignInButtonPressed onSignInButtonPressed;
   final OnSubmitPressed onSubmitPressed;
   final Function onLinkPressed;
-  final String signInText,
-      submitText,
-      linkText,
-      signInHeaderLabel,
-      signUpHeaderLabel;
+  final String signInButtonLabel,
+      submitButtonLabel,
+      linkLabel,
+      signInHeaderText,
+      signUpHeaderText;
 
   LoginPage({
     this.onSignInButtonPressed,
@@ -21,25 +21,20 @@ class LoginPage extends StatefulWidget {
     this.onLinkPressed,
     this.emailValidator,
     this.passwordValidator,
-    this.signInText = 'Sign In',
-    this.submitText = 'Submit',
-    this.linkText = 'Forgot Password?',
-    this.signInHeaderLabel = 'Welcome Back!',
-    this.signUpHeaderLabel = 'Sign Up!',
+    this.signInButtonLabel = 'Sign In',
+    this.submitButtonLabel = 'Submit',
+    this.linkLabel = 'Forgot Password?',
+    this.signInHeaderText = 'Welcome Back!',
+    this.signUpHeaderText = 'Sign Up!',
   });
 
   @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  double _tabBarHeight = 60;
-  double _formHeight;
-
-  @override
   Widget build(BuildContext context) {
+    final double _tabBarHeight = 60;
+
     // 60px for any additional padding.
-    _formHeight = MediaQuery.of(context).size.height - (_tabBarHeight + 60);
+    double _formHeight =
+        MediaQuery.of(context).size.height - (_tabBarHeight + 60);
 
     return DefaultTabController(
       length: 2,
@@ -77,8 +72,22 @@ class _LoginPageState extends State<LoginPage> {
                   height: _formHeight,
                   child: TabBarView(
                     children: <Widget>[
-                      SignInForm(),
-                      SignUpForm(),
+                      SignInForm(
+                        headerText: signInHeaderText,
+                        signInButtonLabel: signInButtonLabel,
+                        emailValidator: emailValidator,
+                        passwordValidator: passwordValidator,
+                        linkLabel: linkLabel,
+                        onSignInButtonPressed: onSignInButtonPressed,
+                        onLinkPressed: onLinkPressed,
+                      ),
+                      SignUpForm(
+                        headerText: signUpHeaderText,
+                        submitButtonLabel: submitButtonLabel,
+                        emailValidator: emailValidator,
+                        passwordValidator: passwordValidator,
+                        onSubmitPressed: onSubmitPressed,
+                      ),
                     ],
                   ),
                 )
