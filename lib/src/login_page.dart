@@ -106,6 +106,7 @@ class _LoginPageState extends State<LoginPage> {
               suffixIcon: Icon(Icons.email),
               validator: widget.emailValidator,
               onSaved: (String value) => _email = value,
+              textInputType: TextInputType.emailAddress,
             ),
             _customizedTextFormField(
               'Password',
@@ -163,6 +164,7 @@ class _LoginPageState extends State<LoginPage> {
               suffixIcon: Icon(Icons.email),
               validator: widget.emailValidator,
               onSaved: (String value) => _email = value,
+              textInputType: TextInputType.emailAddress,
             ),
             _customizedTextFormField(
               'Password',
@@ -214,6 +216,7 @@ class _LoginPageState extends State<LoginPage> {
     EdgeInsets padding,
     Function validator,
     Function onSaved,
+    TextInputType textInputType,
   }) {
     return Container(
       padding: padding ??
@@ -236,6 +239,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         validator: validator,
         onSaved: onSaved,
+        keyboardType: textInputType,
       ),
     );
   }
