@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_system_1/src/login_page.dart';
+
+import './src/sign_in_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Login Systems'),
     );
   }
 }
@@ -35,14 +36,14 @@ class _MyHomePageState extends State<MyHomePage> {
       emailValidator: (String email) {
         if (email.isEmpty) {
           return 'Email is required.';
-        }else {
+        } else {
           return null;
         }
       },
       passwordValidator: (String password) {
         if (password.isEmpty) {
           return 'Password is requried.';
-        }else {
+        } else {
           return null;
         }
       },

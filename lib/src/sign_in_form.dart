@@ -4,17 +4,21 @@ import '../src/customized_text_form_field.dart';
 import '../src/customized_raised_button.dart';
 import '../src/header_label.dart';
 import '../src/customized_link_button.dart';
+import '../src/type_defs.dart';
 
 class SignInForm extends StatefulWidget {
-  final String signInHeaderLabel, linkText, signInText;
-  final Function emailValidator, passwordValidator, onLinkPressed;
+  final String headerText, signInButtonLabel, linkLabel;
+  final Validator emailValidator, passwordValidator;
+  final OnSignInButtonPressed onSignInButtonPressed;
+  final Function onLinkPressed;
 
   SignInForm({
-    this.signInHeaderLabel,
-    this.linkText,
-    this.signInText,
+    this.headerText = 'Welcome Back!',
+    this.signInButtonLabel = 'Sign In',
+    this.linkLabel = 'Forgot Password?',
     this.emailValidator,
     this.passwordValidator,
+    this.onSignInButtonPressed,
     this.onLinkPressed,
   });
 
@@ -35,7 +39,7 @@ class _SignInFormState extends State<SignInForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            HeaderLabel(text: widget.signInHeaderLabel),
+            HeaderLabel(text: widget.headerText),
             CustomizedTextFormField(
               label: 'Email',
               suffixIcon: Icon(Icons.email),
@@ -50,11 +54,11 @@ class _SignInFormState extends State<SignInForm> {
               onSaved: (String value) => _password = value,
             ),
             CustomizedRaisedButton(
-              text: widget.signInText,
-              onPressed: _onLoginFormSaved,
+              text: widget.signInButtonLabel,
+              onPressed: _onSignInFormSaved,
             ),
             CustomizedLinkButton(
-              text: widget.linkText,
+              text: widget.linkLabel,
               onPressed: widget.onLinkPressed,
             ),
           ],
@@ -63,5 +67,13 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
-  void _onLoginFormSaved() {}
+  // Action to be taken when the form is saved.
+  void _onSignInFormSaved() {
+    if (_signInFormKey.currentState.validate()) {
+      _signInFormKey.currentState.save();
+      widget.onSignInButtonPressed != null
+          ? widget.onSignInButtonPressed(_email, _password)
+          : print('Error: No Implementation Provided');
+    }
+  }
 }

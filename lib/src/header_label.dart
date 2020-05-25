@@ -4,7 +4,7 @@ class HeaderLabel extends StatelessWidget {
   final String text;
   final double topPadding;
 
-  HeaderLabel({this.text, this.topPadding});
+  HeaderLabel({this.text, this.topPadding = 40.0});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../src/sign_in_form.dart';
+
 class LoginPage extends StatefulWidget {
   final Validator emailValidator, passwordValidator;
   final OnLoginPressed onLoginPressed;
@@ -80,7 +82,8 @@ class _LoginPageState extends State<LoginPage> {
                   height: _formHeight,
                   child: TabBarView(
                     children: <Widget>[
-                      _signInForm(),
+                      // _signInForm(),
+                      SignInForm(),
                       _signUpForm(),
                     ],
                   ),
@@ -88,41 +91,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _signInForm() {
-    return Form(
-      key: _signInFormKey,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _headerLabel(widget.signInHeaderLabel),
-            _customizedTextFormField(
-              'Email',
-              suffixIcon: Icon(Icons.email),
-              validator: widget.emailValidator,
-              onSaved: (String value) => _email = value,
-              textInputType: TextInputType.emailAddress,
-            ),
-            _customizedTextFormField(
-              'Password',
-              suffixIcon: Icon(Icons.lock),
-              validator: widget.passwordValidator,
-              onSaved: (String value) => _email = value,
-            ),
-            _customizedRaisedButton(
-              text: widget.signInText,
-              onPressed: _onLoginFormSaved,
-            ),
-            _customizedLinkButton(
-              text: widget.linkText,
-              onPressed: widget.onLinkPressed,
-            ),
-          ],
         ),
       ),
     );
