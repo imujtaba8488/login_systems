@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../type_defs.dart';
+import '../global.dart';
 
 class TextFormField02 extends StatelessWidget {
   final String hintText;

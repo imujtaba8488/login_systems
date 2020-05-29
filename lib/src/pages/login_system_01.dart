@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../forms/sign_in_form_01.dart';
 import '../forms/sign_up_form_01.dart';
-import '../type_defs.dart';
+import '../global.dart';
 
 class LoginSystem01 extends StatelessWidget {
   final Validator emailValidator, passwordValidator;

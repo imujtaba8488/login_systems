@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/text_form_field_01.dart';
 import '../widgets/raised_button_01.dart';
 import '../widgets/header.dart';
-import '../type_defs.dart';
+import '../global.dart';
 
 class SignUpForm01 extends StatefulWidget {
   final Text headerText, submitButtonLabel;
