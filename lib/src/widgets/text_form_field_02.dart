@@ -8,6 +8,7 @@ class TextFormField02 extends StatelessWidget {
   final Validator validator;
   final Function onSaved;
   final bool obscureText;
+  final double width;
 
   TextFormField02({
     this.hintText,
@@ -16,22 +17,33 @@ class TextFormField02 extends StatelessWidget {
     this.validator,
     this.onSaved,
     this.obscureText = false,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 5.0),
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-      height: 30,
-      decoration: BoxDecoration(
-        color: Color(0xFFC0C0C0),
-        borderRadius: BorderRadius.circular(50.0),
-      ),
+      width: width ?? MediaQuery.of(context).size.width,
       child: TextFormField(
         decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(50.0),
+            borderSide: BorderSide.none,
+          ),
+          errorBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(50.0),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(50.0),
+            borderSide: BorderSide.none,
+          ),
+          focusedErrorBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(50.0),
+            borderSide: BorderSide.none,
+          ),
           fillColor: fillColor,
-          filled: false,
+          filled: true,
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: TextStyle(

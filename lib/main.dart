@@ -31,6 +31,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return LoginSystem02();
+    return LoginSystem02(
+      emailValidator: (String value) {
+        if (value.isEmpty) {
+          return 'Email cannot be empty.';
+        } else {
+          return null;
+        }
+      },
+    );
   }
 }

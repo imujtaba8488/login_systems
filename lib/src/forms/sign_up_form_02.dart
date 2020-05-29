@@ -1,28 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/link_button_01.dart';
 import '../widgets/text_form_field_02.dart';
-import '../global.dart';
 
-class SignInForm02 extends StatefulWidget {
-  final Validator emailValidator, passwordValidator;
-  final OnSignInButtonPressed onSignInButtonPressed;
-  final Function onLinkButtonPressed;
-
-  SignInForm02({
-    this.emailValidator,
-    this.passwordValidator,
-    this.onSignInButtonPressed,
-    this.onLinkButtonPressed,
-  });
-
+class SignUpForm02 extends StatefulWidget {
   @override
-  _SignInForm02State createState() => _SignInForm02State();
+  _SignUpForm02State createState() => _SignUpForm02State();
 }
 
-class _SignInForm02State extends State<SignInForm02> {
+class _SignUpForm02State extends State<SignUpForm02> {
   GlobalKey<FormState> _formKey = GlobalKey();
-  String _email, _password;
+  String _email, _password, _firstName, _lastName;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +27,7 @@ class _SignInForm02State extends State<SignInForm02> {
       child: Column(
         children: <Widget>[
           Text(
-            'Access Account',
+            'Create Account',
             style: TextStyle(
               fontSize: 20,
             ),
@@ -48,7 +35,7 @@ class _SignInForm02State extends State<SignInForm02> {
           Padding(
             padding: const EdgeInsets.only(top: 3.0),
             child: Text(
-              'Sign in with Email and Password',
+              'Sign up with Email and Password',
               style: TextStyle(
                 fontSize: 12.0,
               ),
@@ -69,40 +56,42 @@ class _SignInForm02State extends State<SignInForm02> {
             TextFormField02(
               hintText: 'Email',
               onSaved: (String value) => _email = value,
-              validator: widget.emailValidator,
+              // validator: widget.emailValidator,
             ),
             SizedBox(height: 5.0),
             TextFormField02(
               hintText: 'Password',
               onSaved: (String value) => _password = value,
-              validator: widget.passwordValidator,
+              // validator: widget.passwordValidator,
             ),
+            SizedBox(height: 5.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 30.0),
-                  child: LinkButton01(onPressed: widget.onLinkButtonPressed),
+                TextFormField02(
+                  width: MediaQuery.of(context).size.width / 2.3,
+                  hintText: 'First Name',
                 ),
-                OutlineButton(
-                  onPressed: _onFormSave,
-                  child: Text('Sign In'),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
+                TextFormField02(
+                  width: MediaQuery.of(context).size.width / 2.3,
+                  hintText: 'Last Name',
                 ),
               ],
-            )
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 1.1,
+              child: OutlineButton(
+                // onPressed: _onFormSave,
+                onPressed: () {},
+                child: Text('SIGN UP'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
-  }
-
-  void _onFormSave() {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      // widget.onSignInButtonPressed(_email, _password);
-    }
   }
 }
