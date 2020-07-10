@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/text_form_field_02.dart';
+import '../global.dart';
 
 class SignUpForm02 extends StatefulWidget {
+  final Validator emailValidator, passwordValidator;
+  final OnSubmitPressed onSignUpButtonPressed;
+  final Function onLinkButtonPressed;
+
+  SignUpForm02({
+    this.emailValidator,
+    this.passwordValidator,
+    this.onSignUpButtonPressed,
+    this.onLinkButtonPressed,
+  });
+
   @override
   _SignUpForm02State createState() => _SignUpForm02State();
 }
@@ -55,14 +67,15 @@ class _SignUpForm02State extends State<SignUpForm02> {
           children: <Widget>[
             TextFormField02(
               hintText: 'Email',
-              onSaved: (String value) => _email = value,
-              // validator: widget.emailValidator,
+              onSaved: (String value) => _email = value.trim(),
+              validator: widget.emailValidator,
             ),
             SizedBox(height: 5.0),
             TextFormField02(
               hintText: 'Password',
-              onSaved: (String value) => _password = value,
-              // validator: widget.passwordValidator,
+              onSaved: (String value) => _password = value.trim(),
+              validator: widget.passwordValidator,
+              obscureText: true,
             ),
             SizedBox(height: 5.0),
             Row(
@@ -71,18 +84,19 @@ class _SignUpForm02State extends State<SignUpForm02> {
                 TextFormField02(
                   width: MediaQuery.of(context).size.width / 2.3,
                   hintText: 'First Name',
+                  onSaved: (String value) => _firstName = value.trim(),
                 ),
                 TextFormField02(
                   width: MediaQuery.of(context).size.width / 2.3,
                   hintText: 'Last Name',
+                  onSaved: (String value) => _lastName = value.trim(),
                 ),
               ],
             ),
             Container(
               width: MediaQuery.of(context).size.width / 1.1,
               child: OutlineButton(
-                // onPressed: _onFormSave,
-                onPressed: () {},
+                onPressed: _onFormSave,
                 child: Text('SIGN UP'),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0),
@@ -93,5 +107,15 @@ class _SignUpForm02State extends State<SignUpForm02> {
         ),
       ),
     );
+  }
+
+  void _onFormSave() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+
+      if (widget.onSignUpButtonPressed != null) {
+        widget.onSignUpButtonPressed(_firstName, _lastName, _email, _password);
+      }
+    }
   }
 }

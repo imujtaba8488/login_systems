@@ -76,6 +76,7 @@ class _SignInForm02State extends State<SignInForm02> {
               hintText: 'Password',
               onSaved: (String value) => _password = value,
               validator: widget.passwordValidator,
+              obscureText: true,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -102,7 +103,10 @@ class _SignInForm02State extends State<SignInForm02> {
   void _onFormSave() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      // widget.onSignInButtonPressed(_email, _password);
+
+      if (widget.onSignInButtonPressed != null) {
+        widget.onSignInButtonPressed(_email, _password);
+      }
     }
   }
 }

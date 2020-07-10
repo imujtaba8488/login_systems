@@ -39,6 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
           return null;
         }
       },
+      onSignUpButtonPressed: (firstName, lastName, email, password){
+        print('$firstName $lastName $email $password');
+      },
     );
   }
 }
